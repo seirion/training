@@ -1,0 +1,6 @@
+//var process = require('process');
+
+process.addListener('exit', function() {
+//process.on('exit', function() {
+	console.log('finished');
+});

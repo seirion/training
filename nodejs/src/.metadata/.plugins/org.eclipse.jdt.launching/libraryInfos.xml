@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<libraryInfos>
+<libraryInfo home="D:\android\jdk-7u45-windows-i586\jre" version="1.7.0_45">
+<bootpath>
+<entry path="D:\android\jdk-7u45-windows-i586\jre\lib\resources.jar"/>
+<entry path="D:\android\jdk-7u45-windows-i586\jre\lib\rt.jar"/>
+<entry path="D:\android\jdk-7u45-windows-i586\jre\lib\sunrsasign.jar"/>
+<entry path="D:\android\jdk-7u45-windows-i586\jre\lib\jsse.jar"/>
+<entry path="D:\android\jdk-7u45-windows-i586\jre\lib\jce.jar"/>
+<entry path="D:\android\jdk-7u45-windows-i586\jre\lib\charsets.jar"/>
+<entry path="D:\android\jdk-7u45-windows-i586\jre\lib\jfr.jar"/>
+<entry path="D:\android\jdk-7u45-windows-i586\jre\classes"/>
+</bootpath>
+<extensionDirs>
+<entry path="D:\android\jdk-7u45-windows-i586\jre\lib\ext"/>
+<entry path="C:\Windows\Sun\Java\lib\ext"/>
+</extensionDirs>
+<endorsedDirs>
+<entry path="D:\android\jdk-7u45-windows-i586\jre\lib\endorsed"/>
+</endorsedDirs>
+</libraryInfo>
+<libraryInfo home="D:\android\jdk-7u45-windows-i586" version="1.7.0_45">
+<bootpath>
+<entry path="D:\android\jdk-7u45-windows-i586\jre\lib\resources.jar"/>
+<entry path="D:\android\jdk-7u45-windows-i586\jre\lib\rt.jar"/>
+<entry path="D:\android\jdk-7u45-windows-i586\jre\lib\sunrsasign.jar"/>
+<entry path="D:\android\jdk-7u45-windows-i586\jre\lib\jsse.jar"/>
+<entry path="D:\android\jdk-7u45-windows-i586\jre\lib\jce.jar"/>
+<entry path="D:\android\jdk-7u45-windows-i586\jre\lib\charsets.jar"/>
+<entry path="D:\android\jdk-7u45-windows-i586\jre\lib\jfr.jar"/>
+<entry path="D:\android\jdk-7u45-windows-i586\jre\classes"/>
+</bootpath>
+<extensionDirs>
+<entry path="D:\android\jdk-7u45-windows-i586\jre\lib\ext"/>
+<entry path="C:\Windows\Sun\Java\lib\ext"/>
+</extensionDirs>
+<endorsedDirs>
+<entry path="D:\android\jdk-7u45-windows-i586\jre\lib\endorsed"/>
+</endorsedDirs>
+</libraryInfo>
+</libraryInfos>
