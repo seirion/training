@@ -1,0 +1,12 @@
+{
+    "name": "myNode",
+    "desciption": "myNode",
+    "version": "1.0.0",
+    "author": {
+        "name": "babo"
+    },
+    "dependencies": {
+        "ejs": "*",
+        "jade": "*"
+    }
+}
