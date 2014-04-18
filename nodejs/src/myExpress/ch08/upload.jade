@@ -1,0 +1,15 @@
+html
+    head
+        title jade-upload
+        
+    body
+        h1 upload
+        hr
+        form(method='post', enctype='multipart/form-data')
+            label comment
+            input(type='text', name='comment')
+            br
+            label file:
+            input(type='file', name='image', required)
+            br
+            input(type='submit', 'upload')

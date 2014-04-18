@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title>Edit Page</title>
+	<meta charset='UTF-8' />
+</head>
+<body>
+
+	<h1>Edit Page</h1>
+	<hr />
+	
+	<form method='POST'>
+		<fieldset>
+		<legend>EDIT DATA</legend>
+		
+		<table>
+		<tr>
+			<td><label>ID</label></td>
+			<td><input name='id' value='<%= data.id %>' disabled /></td>
+		</tr>
+		<tr>
+			<td><label>Name</label></td>
+			<td><input name='name' value='<%= data.name %>' /></td>
+		</tr>
+		<tr>
+			<td><label>Model Number</label></td>
+			<td><input name='modelnumber' value='<%= data.modelNumber %>' /></td>
+		</tr>
+		<tr>
+			<td><label>Series</label></td>
+			<td><input name='series' value='<%= data.series %>' /></td>
+		</tr>
+		</table>
+		
+		<input type='submit' />
+		</fieldset>
+	</form>
+
+</body>
+</html>
