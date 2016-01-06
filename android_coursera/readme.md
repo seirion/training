@@ -6,4 +6,4 @@ by Dr. Adam Porter
 
 
 source codes : 
-https://github.com/aporter/cousera-android
+https://github.com/aporter/coursera-android
