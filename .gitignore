@@ -2,3 +2,5 @@
 *.pyc
 *.exe
 a.out
+target/
+Cargo.lock
