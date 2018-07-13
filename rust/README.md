@@ -4,6 +4,7 @@
 
 https://doc.rust-lang.org/book/second-edition/ch01-00-getting-started.html
 
+(한국어) https://rinthel.github.io/rust-lang-book-ko/
 
 소스코드:
 
