@@ -1,21 +1,52 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
-    );
-  }
+export default class WeatherProject extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            zip: ""
+        }
+    }
+
+    _handleTextChange = event => {
+        this.setState({ zip: event.nativeEvent.text });
+    }
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <Text style={styles.welcome}>
+                    You input {this.state.zip}
+                </Text>
+                <TextInput
+                    style={styles.input}
+                    onSubmitEditing={this._handleTextChange}
+                />
+
+            </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    container: {
+        flex: 1,
+        backgroundColor: '#f5fcff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    welcome: {
+        fontSize: 20,
+        textAlign: "center",
+        margin: 10,
+    },
+    input: {
+        fontSize: 20,
+        borderWidth: 2,
+        padding: 2,
+        height: 40,
+        width: 100,
+        textAlign: "center",
+    }
 });
