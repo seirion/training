@@ -1,0 +1,10 @@
+{
+  "devToolsPort": 19002,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 48590,
+  "expoServerNgrokUrl": "https://74-sq7.anonymous.weather.exp.direct",
+  "packagerNgrokUrl": "https://packager.74-sq7.anonymous.weather.exp.direct",
+  "ngrokPid": 48638,
+  "webpackServerPort": null
+}
