@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { ImageBackground, StyleSheet, Text, TextInput, View } from 'react-native';
 import Forecast from "./Forecast";
 import OpenWeatherMap from "./open_weather_map"
 
@@ -35,19 +35,31 @@ export default class WeatherProject extends React.Component {
         }
         return (
             <View style={styles.container}>
-                <Text style={styles.welcome}>
-                    You input {this.state.zip}
-                </Text>
-                {content}
-                <TextInput
-                    style={styles.input}
-                    onSubmitEditing={this._handleTextChange}
-                />
-
+                <ImageBackground
+                    source={require("./res/flowers.png")}
+                    style={styles.backDrop}
+                >
+                    <View style={styles.overlay}>
+                        <View style={styles.row}>
+                            <Text style={styles.mainText}>
+                                Current Weather for
+                            </Text>
+                            <View style={styles.zipContainer}>
+                                <TextInput
+                                    style={[styles.zipCode, styles.mainText]}
+                                    onSubmitEditing={this._handleTextChange}
+                                />
+                            </View>
+                        </View>
+                        {content}
+                    </View>
+                </ImageBackground>
             </View>
         );
     }
 }
+
+const baseFontSize = 16;
 
 const styles = StyleSheet.create({
     container: {
@@ -56,17 +68,39 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    welcome: {
-        fontSize: 20,
-        textAlign: "center",
-        margin: 10,
+    backDrop: {
+        flex: 1,
+        flexDirection: "column",
+        resizeMode: "cover"
     },
-    input: {
-        fontSize: 20,
-        borderWidth: 2,
-        padding: 2,
-        height: 40,
-        width: 100,
-        textAlign: "center",
+    overlay: {
+        paddingTop: 5,
+        backgroundColor: "black",
+        opacity: 0.5,
+        flexDirection: "column",
+        alignItems: "center"
+    },
+    row: {
+        flexDirection: "row",
+        flexWrap: "nowrap",
+        alignItems: "flex-start",
+        padding: 30
+    },
+    zipContainer: {
+        height: baseFontSize + 10,
+        borderBottomColor: "#dddddd",
+        borderBottomWidth: 1,
+        marginLeft: 5,
+        marginRight: 3
+    },
+    zipCode: {
+        flex: 1,
+        flexBasis: 1,
+        width: 50,
+        height: baseFontSize
+    },
+    mainText: {
+       fontSize: baseFontSize,
+       color: "white"
     }
 });
