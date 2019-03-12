@@ -65,7 +65,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#666666',
-        alignItems: 'center',
         justifyContent: 'center',
     },
     backDrop: {
