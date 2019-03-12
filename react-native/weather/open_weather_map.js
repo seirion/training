@@ -9,10 +9,11 @@ function fetchForecast(zip) {
     return fetch(zipUrl(zip))
         .then(response => response.json())
         .then(responseJson => {
+            console.log(`response: ${responseJson}`)
             return {
                 main: responseJson.weather[0].main,
                 description: responseJson.weather[0].description,
-                temp: responseJson.weather[0].temp
+                temp: responseJson.main.temp
             }
         })
         .catch(error => {
@@ -20,4 +21,4 @@ function fetchForecast(zip) {
         });
 }
 
-export default { featchForecast };
+export default { fetchForecast };

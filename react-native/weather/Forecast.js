@@ -26,13 +26,12 @@ const styles = StyleSheet.create({
         fontSize: 20,
         textAlign: "center",
         margin: 10,
-        color: "white"
+        color: "black"
     },
     mainText: {
         flex: 1,
         fontSize: 16,
         textAlign: "center",
-        margin: 10,
-        color: "white"
+        color: "black"
     }
 });

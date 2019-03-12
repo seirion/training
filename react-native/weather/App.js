@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import Forecast from "./Forecast";
+import OpenWeatherMap from "./open_weather_map"
 
 export default class WeatherProject extends React.Component {
     constructor(props) {
@@ -12,7 +13,13 @@ export default class WeatherProject extends React.Component {
     }
 
     _handleTextChange = event => {
-        this.setState({ zip: event.nativeEvent.text });
+        console.log(`_handleTextChange: ${event.nativeEvent.text}`)
+        let zip = event.nativeEvent.text;
+        OpenWeatherMap.fetchForecast(zip)
+            .then(forecast => {
+                console.log(forecast);
+                this.setState({forecast: forecast});
+            })
     };
 
     render() {
