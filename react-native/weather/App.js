@@ -52,7 +52,7 @@ export default class WeatherProject extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#f5fcff',
+        backgroundColor: '#666666',
         alignItems: 'center',
         justifyContent: 'center',
     },
