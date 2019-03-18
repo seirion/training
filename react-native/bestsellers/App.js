@@ -1,3 +1,3 @@
-import MockBookList from "./MockBookList"
+import BookList from "./BookList"
 
-export default MockBookList;
+export default BookList;
