@@ -58,4 +58,16 @@ class FieldElementTest {
             }
         }
     }
+
+    @Test
+    fun division() {
+        val a = FieldElement(9, 13)
+        val b = FieldElement(3, 13)
+        val c = FieldElement(3, 13)
+        val d = FieldElement(7, 13)
+        val e = FieldElement(5, 13)
+        assertEquals(c , a / b)
+        assertEquals(e , a / d)
+    }
+
 }

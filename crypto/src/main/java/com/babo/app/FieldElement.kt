@@ -44,4 +44,17 @@ data class FieldElement(var num: Int, val prime: Int) {
         exponent % 2 == 0 -> pow(base, exponent / 2).let { it * it % prime }
         else -> base * pow(base, exponent - 1) % prime
     }
+
+    fun divide(other: FieldElement) = apply {
+        require(prime == other.prime)
+        val inverse = pow(other.num, prime - 2)
+        num = (num * inverse) % prime
+    }
+
+    operator fun div(other: FieldElement): FieldElement {
+        require(prime == other.prime)
+        val inverse = pow(other.num, prime - 2)
+        return FieldElement((num * inverse) % prime, prime)
+    }
+
 }
