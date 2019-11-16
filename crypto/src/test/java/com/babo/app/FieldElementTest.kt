@@ -13,4 +13,12 @@ class FieldElementTest {
         assertNotEquals(a, b)
         assertEquals(a, a)
     }
+
+    @Test
+    fun addition() {
+        val a = FieldElement(7, 13)
+        val b = FieldElement(12, 13)
+        val c = FieldElement(6, 13)
+        assertEquals(c , a.add(b))
+    }
 }
