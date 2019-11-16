@@ -9,4 +9,9 @@ data class FieldElement(var num: Int, val prime: Int) {
         require(prime == other.prime)
         num = (num + other.num) % prime
     }
+
+    operator fun plus(other: FieldElement): FieldElement {
+        require(prime == other.prime)
+        return FieldElement((num + other.num) % prime, prime)
+    }
 }

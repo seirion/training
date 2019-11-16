@@ -19,6 +19,7 @@ class FieldElementTest {
         val a = FieldElement(7, 13)
         val b = FieldElement(12, 13)
         val c = FieldElement(6, 13)
+        assertEquals(c , a + b)
         assertEquals(c , a.add(b))
     }
 }
