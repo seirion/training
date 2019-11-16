@@ -46,6 +46,10 @@ class FieldElementTest {
         val a = FieldElement(3, 13)
         val b = FieldElement(1, 13)
         assertEquals(b , a.pow(3))
+
+        val c = FieldElement(7, 13)
+        val d = FieldElement(8, 13)
+        assertEquals(d , c.pow(-3))
     }
 
     @Test

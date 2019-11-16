@@ -36,7 +36,9 @@ data class FieldElement(var num: Int, val prime: Int) {
     }
 
     fun pow(exponent: Int) = apply {
-        num = this.pow(num, exponent)
+        var n = exponent % (prime - 1)
+        if (n < 0) n += prime - 1
+        num = this.pow(num, n)
     }
 
     private fun pow(base: Int, exponent: Int) : Int = when {
