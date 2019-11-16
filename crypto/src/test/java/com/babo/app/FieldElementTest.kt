@@ -22,4 +22,13 @@ class FieldElementTest {
         assertEquals(c , a + b)
         assertEquals(c , a.add(b))
     }
+
+    @Test
+    fun subtract() {
+        val a = FieldElement(7, 13)
+        val b = FieldElement(12, 13)
+        val c = FieldElement(8, 13)
+        assertEquals(c , a - b)
+        assertEquals(c , a.subtract(b))
+    }
 }

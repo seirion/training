@@ -14,4 +14,14 @@ data class FieldElement(var num: Int, val prime: Int) {
         require(prime == other.prime)
         return FieldElement((num + other.num) % prime, prime)
     }
+
+    fun subtract(other: FieldElement) = apply {
+        require(prime == other.prime)
+        num = (prime + num - other.num) % prime
+    }
+
+    operator fun minus(other: FieldElement): FieldElement {
+        require(prime == other.prime)
+        return FieldElement((prime + num - other.num) % prime, prime)
+    }
 }
