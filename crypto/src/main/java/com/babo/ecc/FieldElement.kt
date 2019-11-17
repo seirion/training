@@ -1,4 +1,4 @@
-package com.babo.app
+package com.babo.ecc
 
 data class FieldElement(var num: Int, val prime: Int) {
     init {

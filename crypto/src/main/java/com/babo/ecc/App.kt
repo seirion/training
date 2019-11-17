@@ -1,4 +1,4 @@
-package com.babo.app
+package com.babo.ecc
 
 fun main(args: Array<String>) {
     println("ok")

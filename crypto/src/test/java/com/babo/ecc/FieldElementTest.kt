@@ -1,4 +1,4 @@
-package com.babo.app
+package com.babo.ecc
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotEquals
