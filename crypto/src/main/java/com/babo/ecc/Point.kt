@@ -28,8 +28,8 @@ data class Point(var x: Int?, var y: Int?, val a: Int, val b: Int) {
             "Points $this $other are not on the same curve"
         }
         return when {
-            x == null -> other
-            other.x == null -> this
+            x == null -> Point(other.x, other.y, other.a, other.b)
+            other.x == null -> Point(x, y, a, b)
             y == -1 * other.y!! -> Point(null, null, a, b)
             else -> this
         }
