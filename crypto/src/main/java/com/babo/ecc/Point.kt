@@ -17,14 +17,21 @@ data class Point(var x: Int?, var y: Int?, val a: Int, val b: Int) {
         }
         if (x == null) return other
         if (other.x == null) return this
+        if (y == -1 * other.y!!) {
+            x = null
+            y = null
+        }
     }
 
     operator fun plus(other: Point): Point {
         require(a == other.a && b == other.b) {
             "Points $this $other are not on the same curve"
         }
-        if (x == null) return other
-        if (other.x == null) return this
-        else return this
+        return when {
+            x == null -> other
+            other.x == null -> this
+            y == -1 * other.y!! -> Point(null, null, a, b)
+            else -> this
+        }
     }
 }

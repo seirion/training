@@ -23,4 +23,11 @@ class PointTest {
         val p2 = Point(-1, -1, 5, 7)
         assertEquals(p2, p1 + p2)
     }
+
+    @Test
+    fun additionalInverse() {
+        val p1 = Point(-1, 1, 5, 7)
+        val p2 = Point(-1, -1, 5, 7)
+        assertEquals(Point(null, null, 5, 7), p1 + p2)
+    }
 }
