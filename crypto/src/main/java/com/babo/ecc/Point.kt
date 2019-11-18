@@ -1,10 +1,30 @@
 package com.babo.ecc
 
-data class Point(var x: Int, var y: Int, val a: Int, val b: Int) {
+data class Point(var x: Int?, var y: Int?, val a: Int, val b: Int) {
     init {
-        // y^2 = x^3 + ax + b
-        require(y * y == x * x * x + a * x + b) {
-            "point($x, $y) is not on the curve"
+        require((x == null && y == null) || (x != null && y != null))
+        if (x != null && y != null) {
+            // y^2 = x^3 + ax + b
+            require(y!! * y!! == x!! * x!! * x!! + a * x!! + b) {
+                "Point($x, $y) is not on the curve"
+            }
         }
+    }
+
+    fun add(other: Point) = apply {
+        require(a == other.a && b == other.b) {
+            "Points $this $other are not on the same curve"
+        }
+        if (x == null) return other
+        if (other.x == null) return this
+    }
+
+    operator fun plus(other: Point): Point {
+        require(a == other.a && b == other.b) {
+            "Points $this $other are not on the same curve"
+        }
+        if (x == null) return other
+        if (other.x == null) return this
+        else return this
     }
 }
