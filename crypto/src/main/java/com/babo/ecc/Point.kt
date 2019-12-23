@@ -25,18 +25,21 @@ data class Point(var x: FieldElement?, var y: FieldElement?, val a: Int, val b: 
             x == null -> other.copy()
             other.x == null -> this.copy()
             y!!.num == other.y!!.num.negate() -> Point(null, null, a, b) // y == -y
-            //this != other -> addDifferentPoint(other)
+            this != other -> addDifferentPoints(other)
             else -> this.copy() // not implemented
         }
     }
 
-    /*
-    private fun addDifferentPoint(other:Point): Point {
+    private fun addDifferentPoints(other: Point): Point {
         // require(this != other && !this.infinity && !other.infinity)
         val x1 = x!!
         val y1 = y!!
         val x2 = other.x!!
         val y2 = other.y!!
+
+        val s = (y2 - y1) / (x2 - x1) // slop
+        val x3 = s * s - x1 - x2
+        val y3 = s * (x1 - x3) - y1
+        return Point(x3, y3, a, b)
     }
-    */
 }

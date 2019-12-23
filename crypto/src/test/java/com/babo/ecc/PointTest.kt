@@ -1,5 +1,6 @@
 package com.babo.ecc
 
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
@@ -24,9 +25,7 @@ class PointTest {
             val yRaw = BigInteger.valueOf(it.second)
             val x = FieldElement(xRaw, prime)
             val y = FieldElement(yRaw, prime)
-            assertDoesNotThrow {
-                Point(x, y, 0, 7)
-            }
+            assertDoesNotThrow { Point(x, y, 0, 7) }
         }
         invalidPoints.forEach {
             val xRaw = BigInteger.valueOf(it.first)
@@ -37,4 +36,19 @@ class PointTest {
         }
     }
 
+    @Test
+    fun additionOfTwoDifferentPoints() {
+        val prime = BigInteger.valueOf(223L)
+        val x1 = FieldElement(BigInteger.valueOf(192L), prime)
+        val y1 = FieldElement(BigInteger.valueOf(105L), prime)
+        val x2 = FieldElement(BigInteger.valueOf(17L), prime)
+        val y2 = FieldElement(BigInteger.valueOf(56L), prime)
+
+        val p1 = Point(x1, y1, 0, 7)
+        val p2 = Point(x2, y2, 0, 7)
+
+        val p3 = p1 + p2
+        assertEquals(BigInteger.valueOf(170), p3.x!!.num)
+        assertEquals(BigInteger.valueOf(142), p3.y!!.num)
+    }
 }
