@@ -2,20 +2,20 @@ package com.babo.ecc
 
 import java.math.BigInteger
 
-data class Point(var x: BigInteger?, var y: BigInteger?, val a: Int, val b: Int) {
+data class Point(var x: FieldElement?, var y: FieldElement?, val a: Int, val b: Int) {
     init {
         require((x == null && y == null) || (x != null && y != null))
         if (x != null && y != null) {
             val bigA = BigInteger.valueOf(a.toLong())
             val bigB = BigInteger.valueOf(b.toLong())
             // y^2 = x^3 + ax + b
-            require(y!!.pow(2) == x!!.pow(3) + bigA * x!! + bigB) {
+            require(y!!.num.pow(2).mod(y!!.prime) == (x!!.num.pow(3) + bigA * x!!.num + bigB).mod(x!!.prime)) {
                 "Point($x, $y) is not on the curve"
             }
         }
     }
 
-    fun infinity(): Boolean = (x == null) // point of inifinity
+    fun infinity(): Boolean = (x == null) // point of infinity
 
     operator fun plus(other: Point): Point {
         require(a == other.a && b == other.b) {
@@ -24,8 +24,19 @@ data class Point(var x: BigInteger?, var y: BigInteger?, val a: Int, val b: Int)
         return when {
             x == null -> other.copy()
             other.x == null -> this.copy()
-            y == other.y!!.negate() -> Point(null, null, a, b)
+            y!!.num == other.y!!.num.negate() -> Point(null, null, a, b) // y == -y
+            //this != other -> addDifferentPoint(other)
             else -> this.copy() // not implemented
         }
     }
+
+    /*
+    private fun addDifferentPoint(other:Point): Point {
+        // require(this != other && !this.infinity && !other.infinity)
+        val x1 = x!!
+        val y1 = y!!
+        val x2 = other.x!!
+        val y2 = other.y!!
+    }
+    */
 }

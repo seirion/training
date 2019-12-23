@@ -1,40 +1,40 @@
 package com.babo.ecc
 
-import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
-import java.lang.IllegalArgumentException
 import java.math.BigInteger
 
 class PointTest {
     @Test
     fun testPointOnTheCurve() {
-        assertDoesNotThrow {
-            Point(Big_M1, Big_M1, 5, 7)
+        val prime = BigInteger.valueOf(223L)
+        val validPoints = listOf(
+                192L to 105L,
+                17L to 56L,
+                1L to 193L
+        )
+        val invalidPoints = listOf(
+                200L to 119L,
+                42L to 99L
+        )
+
+        validPoints.forEach {
+            val xRaw = BigInteger.valueOf(it.first)
+            val yRaw = BigInteger.valueOf(it.second)
+            val x = FieldElement(xRaw, prime)
+            val y = FieldElement(yRaw, prime)
+            assertDoesNotThrow {
+                Point(x, y, 0, 7)
+            }
         }
-        assertThrows<IllegalArgumentException> {
-            Point(Big_M1, Big_M2, 5, 7)
+        invalidPoints.forEach {
+            val xRaw = BigInteger.valueOf(it.first)
+            val yRaw = BigInteger.valueOf(it.second)
+            val x = FieldElement(xRaw, prime)
+            val y = FieldElement(yRaw, prime)
+            assertThrows<Throwable> { Point(x, y, 0, 7) }
         }
     }
 
-    @Test
-    fun additionOfInf() {
-        val p1 = Point(null, null, 5, 7)
-        val p2 = Point(Big_M1, Big_M1, 5, 7)
-        assertEquals(p2, p1 + p2)
-    }
-
-    @Test
-    fun additionalInverse() {
-        val p1 = Point(Big_M1, Big1, 5, 7)
-        val p2 = Point(Big_M1, Big_M1, 5, 7)
-        assertEquals(Point(null, null, 5, 7), p1 + p2)
-    }
-
-    companion object {
-        private val Big_M1 = BigInteger.valueOf(-1L)
-        private val Big_M2 = BigInteger.valueOf(-2L)
-        private val Big1 = BigInteger.ONE
-    }
 }
