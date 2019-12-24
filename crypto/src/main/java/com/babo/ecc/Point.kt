@@ -33,6 +33,10 @@ data class Point(var x: FieldElement?, var y: FieldElement?, val a: Int, val b: 
     operator fun times(number: Long) = times(BigInteger.valueOf(number))
 
     operator fun times(number: BigInteger): Point {
+        require(number > BigInteger.ZERO) {
+            "invalid param: number must be greater than zero"
+        }
+
         if (number == BigInteger.ONE) return this.copy()
         val half = times(number.divide(BigInteger.valueOf(2L)))
         return if (number.testBit(0)) { // isOdd
