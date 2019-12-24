@@ -1,5 +1,6 @@
 package com.babo.ecc
 
+import com.babo.utils.isOdd
 import java.math.BigInteger
 
 data class FieldElement(var num: BigInteger, val prime: BigInteger) {
@@ -38,8 +39,8 @@ data class FieldElement(var num: BigInteger, val prime: BigInteger) {
 
     private fun pow(base: BigInteger, exponent: BigInteger) : BigInteger = when {
         exponent == BigInteger.ZERO -> BigInteger.ONE
-        exponent.mod(TWO) == BigInteger.ZERO -> pow(base, exponent.divide(TWO)).let { it * it % prime }
-        else -> base * pow(base, exponent - BigInteger.ONE) % prime
+        exponent.isOdd() -> base * pow(base, exponent - BigInteger.ONE) % prime
+        else -> pow(base, exponent.divide(TWO)).let { it * it % prime }
     }
 
     operator fun div(other: FieldElement): FieldElement {
