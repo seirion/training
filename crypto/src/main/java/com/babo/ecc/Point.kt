@@ -1,5 +1,6 @@
 package com.babo.ecc
 
+import com.babo.utils.isOdd
 import java.math.BigInteger
 
 data class Point(var x: FieldElement?, var y: FieldElement?, val a: Int, val b: Int) {
@@ -39,7 +40,7 @@ data class Point(var x: FieldElement?, var y: FieldElement?, val a: Int, val b: 
 
         if (number == BigInteger.ONE) return this.copy()
         val half = times(number.divide(BigInteger.valueOf(2L)))
-        return if (number.testBit(0)) { // isOdd
+        return if (number.isOdd()) {
             half + half + this
         } else {
             half + half
