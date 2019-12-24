@@ -47,6 +47,8 @@ data class Point(var x: FieldElement?, var y: FieldElement?, val a: Int, val b: 
     }
 
     private fun addIdenticalPoints(): Point {
+        if (y!!.num == BigInteger.ZERO) return Point(null, null, a, b) // infinite zero
+
         val bigA = BigInteger.valueOf(a.toLong())
         val three = BigInteger.valueOf(3)
         val two = BigInteger.valueOf(2)
