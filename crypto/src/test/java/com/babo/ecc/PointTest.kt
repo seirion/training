@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 import java.math.BigInteger
+import com.babo.utils.times
 
 class PointTest {
     @Test
@@ -68,6 +69,14 @@ class PointTest {
         assertEquals(pointOf(116, 55, 223L, 0, 7), p * 8)
         assertEquals(pointOf(69, 86, 223L, 0, 7), p * 9)
         assertEquals(pointOf(154, 150, 223L, 0, 7), p * 10)
+    }
+
+    @Test
+    fun testCommutative() {
+        val p = pointOf(47, 71, 223, 0, 7)
+        assertEquals(p * 23, 23 * p)
+        assertEquals(p * 111, 111 * p)
+        assertEquals(p * 3343, 3343 * p)
     }
 
     private fun pointOf(x: Long, y: Long, prime: Long, a: Int, b: Int): Point {
