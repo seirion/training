@@ -38,18 +38,10 @@ class PointTest {
 
     @Test
     fun additionOfTwoDifferentPoints() {
-        val prime = BigInteger.valueOf(223L)
-        val x1 = FieldElement(BigInteger.valueOf(192L), prime)
-        val y1 = FieldElement(BigInteger.valueOf(105L), prime)
-        val x2 = FieldElement(BigInteger.valueOf(17L), prime)
-        val y2 = FieldElement(BigInteger.valueOf(56L), prime)
-
-        val p1 = Point(x1, y1, 0, 7)
-        val p2 = Point(x2, y2, 0, 7)
-
+        val p1 = pointOf(192, 105, 223, 0, 7)
+        val p2 = pointOf(17, 56, 223, 0, 7)
         val p3 = p1 + p2
-        assertEquals(BigInteger.valueOf(170), p3.x!!.num)
-        assertEquals(BigInteger.valueOf(142), p3.y!!.num)
+        assertEquals(pointOf(170, 142, 223L, 0, 7), p3)
     }
 
     @Test
@@ -60,7 +52,15 @@ class PointTest {
 
         val p1 = Point(x1, y1, 0, 7)
         val p3 = p1 + p1
-        assertEquals(BigInteger.valueOf(36), p3.x!!.num)
-        assertEquals(BigInteger.valueOf(111), p3.y!!.num)
+        assertEquals(pointOf(36, 111, 223L, 0, 7), p3)
+    }
+
+    private fun pointOf(x: Long, y: Long, prime: Long, a: Int, b: Int): Point {
+        val bigPrime = BigInteger.valueOf(prime)
+        return Point(
+                FieldElement(BigInteger.valueOf(x), bigPrime),
+                FieldElement(BigInteger.valueOf(y), bigPrime),
+                a, b
+        )
     }
 }
