@@ -55,6 +55,21 @@ class PointTest {
         assertEquals(pointOf(36, 111, 223L, 0, 7), p3)
     }
 
+    @Test
+    fun scalarMultiplication() {
+        val p = pointOf(47, 71, 223, 0, 7)
+        assertEquals(pointOf(47, 71, 223L, 0, 7), p * 1)
+        assertEquals(pointOf(36, 111, 223L, 0, 7), p * 2)
+        assertEquals(pointOf(15, 137, 223L, 0, 7), p * 3)
+        assertEquals(pointOf(194, 51, 223L, 0, 7), p * 4)
+        assertEquals(pointOf(126, 96, 223L, 0, 7), p * 5)
+        assertEquals(pointOf(139, 137, 223L, 0, 7), p * 6)
+        assertEquals(pointOf(92, 47, 223L, 0, 7), p * 7)
+        assertEquals(pointOf(116, 55, 223L, 0, 7), p * 8)
+        assertEquals(pointOf(69, 86, 223L, 0, 7), p * 9)
+        assertEquals(pointOf(154, 150, 223L, 0, 7), p * 10)
+    }
+
     private fun pointOf(x: Long, y: Long, prime: Long, a: Int, b: Int): Point {
         val bigPrime = BigInteger.valueOf(prime)
         return Point(

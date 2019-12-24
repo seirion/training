@@ -30,6 +30,18 @@ data class Point(var x: FieldElement?, var y: FieldElement?, val a: Int, val b: 
         }
     }
 
+    operator fun times(number: Long) = times(BigInteger.valueOf(number))
+
+    operator fun times(number: BigInteger): Point {
+        if (number == BigInteger.ONE) return this.copy()
+        val half = times(number.divide(BigInteger.valueOf(2L)))
+        return if (number.testBit(0)) { // isOdd
+            half + half + this
+        } else {
+            half + half
+        }
+    }
+
     private fun addIdenticalPoints(): Point {
         val bigA = BigInteger.valueOf(a.toLong())
         val three = BigInteger.valueOf(3)
