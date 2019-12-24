@@ -51,4 +51,16 @@ class PointTest {
         assertEquals(BigInteger.valueOf(170), p3.x!!.num)
         assertEquals(BigInteger.valueOf(142), p3.y!!.num)
     }
+
+    @Test
+    fun additionOfIdenticalPoints() {
+        val prime = BigInteger.valueOf(223L)
+        val x1 = FieldElement(BigInteger.valueOf(47L), prime)
+        val y1 = FieldElement(BigInteger.valueOf(71L), prime)
+
+        val p1 = Point(x1, y1, 0, 7)
+        val p3 = p1 + p1
+        assertEquals(BigInteger.valueOf(36), p3.x!!.num)
+        assertEquals(BigInteger.valueOf(111), p3.y!!.num)
+    }
 }

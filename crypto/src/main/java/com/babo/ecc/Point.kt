@@ -25,9 +25,19 @@ data class Point(var x: FieldElement?, var y: FieldElement?, val a: Int, val b: 
             x == null -> other.copy()
             other.x == null -> this.copy()
             y!!.num == other.y!!.num.negate() -> Point(null, null, a, b) // y == -y
-            this != other -> addDifferentPoints(other)
-            else -> this.copy() // not implemented
+            this == other -> addIdenticalPoints()
+            else -> addDifferentPoints(other) // this != other
         }
+    }
+
+    private fun addIdenticalPoints(): Point {
+        val bigA = BigInteger.valueOf(a.toLong())
+        val three = BigInteger.valueOf(3)
+        val two = BigInteger.valueOf(2)
+        val s = (x!! * x!! * three + bigA) / (y!! * two) // s = (3x^2) / (2y)
+        val x3 = s * s - (x!! * two)
+        val y3 = s * (x!! - x3) - y!!
+        return Point(x3, y3, a, b)
     }
 
     private fun addDifferentPoints(other: Point): Point {
