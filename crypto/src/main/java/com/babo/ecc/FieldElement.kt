@@ -12,6 +12,10 @@ data class FieldElement(var num: BigInteger, val prime: BigInteger) {
         return FieldElement((num + other.num) % prime, prime)
     }
 
+    operator fun plus(other: BigInteger): FieldElement {
+        return FieldElement((num + other) % prime, prime)
+    }
+
     operator fun minus(other: FieldElement): FieldElement {
         require(prime == other.prime)
         return FieldElement((prime + num - other.num) % prime, prime)
@@ -20,6 +24,10 @@ data class FieldElement(var num: BigInteger, val prime: BigInteger) {
     operator fun times(other: FieldElement): FieldElement {
         require(prime == other.prime)
         return FieldElement((num * other.num) % prime, prime)
+    }
+
+    operator fun times(other: BigInteger): FieldElement {
+        return FieldElement((num * other) % prime, prime)
     }
 
     fun pow(exponent: BigInteger) = apply {
