@@ -45,9 +45,16 @@ data class FieldElement(var num: BigInteger, val prime: BigInteger) {
 
     operator fun div(other: FieldElement): FieldElement {
         require(prime == other.prime)
-        val inverse = pow(other.num, prime - TWO)
-        return FieldElement((num * inverse) % prime, prime)
+        return FieldElement((num * multiplicativeInverse()) % prime, prime)
     }
+
+    fun isAdditionalInverseOf(other: FieldElement?) : Boolean {
+        require(other == null || prime == other.prime)
+        if (other == null) return false
+        return (num + other.num) % prime == BigInteger.ZERO
+    }
+
+    private fun multiplicativeInverse() = pow(num, prime - TWO)
 
     companion object {
         private val TWO = BigInteger.valueOf(2L)

@@ -25,7 +25,7 @@ data class Point(var x: FieldElement?, var y: FieldElement?, val a: Int, val b: 
         return when {
             x == null -> other.copy()
             other.x == null -> this.copy()
-            (y!!.num + other.y!!.num) % x!!.prime == BigInteger.ZERO -> Point(null, null, a, b) // y == -y
+            y!!.isAdditionalInverseOf(other.y) -> Point(null, null, a, b) // y == -y
             this == other -> addIdenticalPoints()
             else -> addDifferentPoints(other) // this != other
         }
