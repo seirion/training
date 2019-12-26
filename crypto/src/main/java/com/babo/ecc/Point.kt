@@ -4,6 +4,9 @@ import com.babo.utils.isOdd
 import java.math.BigInteger
 
 data class Point(var x: FieldElement?, var y: FieldElement?, val a: Int, val b: Int) {
+    constructor(x: BigInteger, y: BigInteger, p: BigInteger, a: Int, b: Int) :
+            this(FieldElement(x, p), FieldElement(y, p), a, b)
+
     init {
         require((x == null && y == null) || (x != null && y != null))
         if (x != null && y != null) {
@@ -39,7 +42,7 @@ data class Point(var x: FieldElement?, var y: FieldElement?, val a: Int, val b: 
         }
 
         if (number == BigInteger.ONE) return this.copy()
-        val half = times(number.divide(BigInteger.valueOf(2L)))
+        val half = times(number / BigInteger.valueOf(2L))
         return if (number.isOdd()) {
             half + half + this
         } else {
@@ -50,10 +53,9 @@ data class Point(var x: FieldElement?, var y: FieldElement?, val a: Int, val b: 
     private fun addIdenticalPoints(): Point {
         if (y!!.num == BigInteger.ZERO) return Point(null, null, a, b) // infinite zero
 
-        val bigA = BigInteger.valueOf(a.toLong())
         val three = BigInteger.valueOf(3)
         val two = BigInteger.valueOf(2)
-        val s = (x!! * x!! * three + bigA) / (y!! * two) // s = (3x^2) / (2y)
+        val s = (x!! * x!! * three) / (y!! * two) // s = (3x^2) / (2y)
         val x3 = s * s - (x!! * two)
         val y3 = s * (x!! - x3) - y!!
         return Point(x3, y3, a, b)

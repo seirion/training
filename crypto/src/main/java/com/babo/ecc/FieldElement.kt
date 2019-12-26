@@ -54,7 +54,7 @@ data class FieldElement(var num: BigInteger, val prime: BigInteger) {
         return (num + other.num) % prime == BigInteger.ZERO
     }
 
-    private fun multiplicativeInverse() = pow(num, prime - TWO)
+    fun multiplicativeInverse() = pow(num, prime - TWO)
 
     companion object {
         private val TWO = BigInteger.valueOf(2L)
