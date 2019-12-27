@@ -5,6 +5,9 @@ import com.babo.utils.times
 import java.math.BigInteger
 
 data class Point(var x: FieldElement?, var y: FieldElement?, val a: Int, val b: Int) {
+    constructor(x: Long, y: Long, p: Long, a: Int, b: Int) :
+            this(FieldElement(x, p), FieldElement(y, p), a, b)
+
     constructor(x: BigInteger, y: BigInteger, p: BigInteger, a: Int, b: Int) :
             this(FieldElement(x, p), FieldElement(y, p), a, b)
 

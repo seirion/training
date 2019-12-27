@@ -37,7 +37,7 @@ class Secp256k1(private val priKey: BigInteger = rng()) {
         private fun rng(byteSize: Int = 32): BigInteger {
             return ByteArray(byteSize).let {
                 SecureRandom().nextBytes(it)
-                BigInteger(it) % n
+                BigInteger(it).mod(n)
             }
         }
     }

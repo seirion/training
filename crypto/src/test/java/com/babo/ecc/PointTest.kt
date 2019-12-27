@@ -4,13 +4,12 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
-import java.math.BigInteger
 import com.babo.utils.times
 
 class PointTest {
     @Test
     fun testPointOnTheCurve() {
-        val prime = BigInteger.valueOf(223L)
+        val prime = 223L
         val validPoints = listOf(
                 192L to 105L,
                 17L to 56L,
@@ -22,69 +21,56 @@ class PointTest {
         )
 
         validPoints.forEach {
-            val xRaw = BigInteger.valueOf(it.first)
-            val yRaw = BigInteger.valueOf(it.second)
-            val x = FieldElement(xRaw, prime)
-            val y = FieldElement(yRaw, prime)
+            val x = FieldElement(it.first, prime)
+            val y = FieldElement(it.second, prime)
             assertDoesNotThrow { Point(x, y, 0, 7) }
         }
         invalidPoints.forEach {
-            val xRaw = BigInteger.valueOf(it.first)
-            val yRaw = BigInteger.valueOf(it.second)
-            val x = FieldElement(xRaw, prime)
-            val y = FieldElement(yRaw, prime)
+            val x = FieldElement(it.first, prime)
+            val y = FieldElement(it.second, prime)
             assertThrows<Throwable> { Point(x, y, 0, 7) }
         }
     }
 
     @Test
     fun additionOfTwoDifferentPoints() {
-        val p1 = pointOf(192, 105, 223, 0, 7)
-        val p2 = pointOf(17, 56, 223, 0, 7)
+        val p1 = Point(192, 105, 223, 0, 7)
+        val p2 = Point(17, 56, 223, 0, 7)
         val p3 = p1 + p2
-        assertEquals(pointOf(170, 142, 223L, 0, 7), p3)
+        assertEquals(Point(170, 142, 223L, 0, 7), p3)
     }
 
     @Test
     fun additionOfIdenticalPoints() {
-        val prime = BigInteger.valueOf(223L)
-        val x1 = FieldElement(BigInteger.valueOf(47L), prime)
-        val y1 = FieldElement(BigInteger.valueOf(71L), prime)
+        val prime = 223L
+        val x1 = FieldElement(47, prime)
+        val y1 = FieldElement(71, prime)
 
         val p1 = Point(x1, y1, 0, 7)
         val p3 = p1 + p1
-        assertEquals(pointOf(36, 111, 223L, 0, 7), p3)
+        assertEquals(Point(36, 111, 223L, 0, 7), p3)
     }
 
     @Test
     fun scalarMultiplication() {
-        val p = pointOf(47, 71, 223, 0, 7)
-        assertEquals(pointOf(47, 71, 223L, 0, 7), p * 1)
-        assertEquals(pointOf(36, 111, 223L, 0, 7), p * 2)
-        assertEquals(pointOf(15, 137, 223L, 0, 7), p * 3)
-        assertEquals(pointOf(194, 51, 223L, 0, 7), p * 4)
-        assertEquals(pointOf(126, 96, 223L, 0, 7), p * 5)
-        assertEquals(pointOf(139, 137, 223L, 0, 7), p * 6)
-        assertEquals(pointOf(92, 47, 223L, 0, 7), p * 7)
-        assertEquals(pointOf(116, 55, 223L, 0, 7), p * 8)
-        assertEquals(pointOf(69, 86, 223L, 0, 7), p * 9)
-        assertEquals(pointOf(154, 150, 223L, 0, 7), p * 10)
+        val p = Point(47, 71, 223, 0, 7)
+        assertEquals(Point(47, 71, 223L, 0, 7), p * 1)
+        assertEquals(Point(36, 111, 223L, 0, 7), p * 2)
+        assertEquals(Point(15, 137, 223L, 0, 7), p * 3)
+        assertEquals(Point(194, 51, 223L, 0, 7), p * 4)
+        assertEquals(Point(126, 96, 223L, 0, 7), p * 5)
+        assertEquals(Point(139, 137, 223L, 0, 7), p * 6)
+        assertEquals(Point(92, 47, 223L, 0, 7), p * 7)
+        assertEquals(Point(116, 55, 223L, 0, 7), p * 8)
+        assertEquals(Point(69, 86, 223L, 0, 7), p * 9)
+        assertEquals(Point(154, 150, 223L, 0, 7), p * 10)
     }
 
     @Test
     fun testCommutative() {
-        val p = pointOf(47, 71, 223, 0, 7)
+        val p = Point(47, 71, 223, 0, 7)
         assertEquals(p * 23, 23 * p)
         assertEquals(p * 111, 111 * p)
         assertEquals(p * 3343, 3343 * p)
-    }
-
-    private fun pointOf(x: Long, y: Long, prime: Long, a: Int, b: Int): Point {
-        val bigPrime = BigInteger.valueOf(prime)
-        return Point(
-                FieldElement(BigInteger.valueOf(x), bigPrime),
-                FieldElement(BigInteger.valueOf(y), bigPrime),
-                a, b
-        )
     }
 }
