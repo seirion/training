@@ -35,10 +35,9 @@ class Secp256k1(private val priKey: BigInteger = rng()) {
         val G = Point(Gx, Gy, p, 0, 7) // initial point
 
         private fun rng(byteSize: Int = 32): BigInteger {
-            val randomBytes = ByteArray(byteSize)
-            SecureRandom().nextBytes(randomBytes)
-            return BigInteger(randomBytes).let {
-                return@let if (it.signum() < 1) it.negate() else it
+            return ByteArray(byteSize).let {
+                SecureRandom().nextBytes(it)
+                BigInteger(it) % n
             }
         }
     }

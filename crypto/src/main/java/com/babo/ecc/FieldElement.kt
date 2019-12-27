@@ -8,7 +8,8 @@ data class FieldElement(var num: BigInteger, val prime: BigInteger) {
     constructor(num: Long, prime: Long) : this(BigInteger.valueOf(num), BigInteger.valueOf(prime))
 
     init {
-        require(BigInteger.ZERO <= num && num < prime)
+        require(prime > BigInteger.ONE)
+        num %= prime
     }
 
     operator fun plus(other: FieldElement): FieldElement {
