@@ -1,6 +1,7 @@
 package com.babo.ecc
 
 import com.babo.utils.isOdd
+import com.babo.utils.times
 import java.math.BigInteger
 
 data class Point(var x: FieldElement?, var y: FieldElement?, val a: Int, val b: Int) {
@@ -48,6 +49,15 @@ data class Point(var x: FieldElement?, var y: FieldElement?, val a: Int, val b: 
         } else {
             half + half
         }
+    }
+
+    fun verify(msg: ByteArray, signature: Signature): Boolean {
+        val z = BigInteger(msg)
+        val sInv = FieldElement(signature.s, Secp256k1.n).multiplicativeInverse()
+        val u = z * sInv % Secp256k1.n
+        val v = signature.r * sInv % Secp256k1.n
+        val r = (u * Secp256k1.G) + (v * this)
+        return r.x!!.num == signature.r
     }
 
     private fun addIdenticalPoints(): Point {

@@ -24,15 +24,6 @@ class Secp256k1(private val priKey: BigInteger = rng()) {
         return Signature(r, s)
     }
 
-    fun verify(msg: ByteArray, signature: Signature): Boolean {
-        val z = BigInteger(msg)
-        val sInv = FieldElement(signature.s, n).multiplicativeInverse()
-        val u = z * sInv % n
-        val v = signature.r * sInv % n
-        val r = (u * G) + (v * pubKey)
-        return r.x!!.num == signature.r
-    }
-
     companion object {
         val p = BigInteger("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F", 16) // 2^256 - 2^32 - 977
         val n = BigInteger("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141", 16) // order
@@ -41,7 +32,7 @@ class Secp256k1(private val priKey: BigInteger = rng()) {
         val Gx = BigInteger("79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798", 16)
         val Gy = BigInteger("483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8", 16)
 
-        private val G = Point(Gx, Gy, p, 0, 7) // initial point
+        val G = Point(Gx, Gy, p, 0, 7) // initial point
 
         private fun rng(byteSize: Int = 32): BigInteger {
             val randomBytes = ByteArray(byteSize)

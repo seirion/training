@@ -30,6 +30,6 @@ class Secp256k1Test {
         assertEquals(32, msg.toByteArray().size)
         val signature = pk.sign(msg.toByteArray())
         println(signature)
-        assertTrue(pk.verify(msg.toByteArray(), signature))
+        assertTrue(pk.pubKey.verify(msg.toByteArray(), signature))
     }
 }
