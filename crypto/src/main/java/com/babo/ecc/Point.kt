@@ -16,10 +16,11 @@ data class Point(var x: FieldElement?, var y: FieldElement?, val a: Int, val b: 
         if (x != null && y != null) {
             val bigA = BigInteger.valueOf(a.toLong())
             val bigB = BigInteger.valueOf(b.toLong())
+            val prime = x!!.prime
             // y^2 = x^3 + ax + b
-            require(y!!.num.pow(2).mod(y!!.prime) == (x!!.num.pow(3) + bigA * x!!.num + bigB).mod(x!!.prime)) {
-                "Point($x, $y) is not on the curve"
-            }
+            val lhs = y!!.num.pow(2) % prime
+            val rhs = (x!!.num.pow(3) + bigA * x!!.num + bigB) % prime
+            require(lhs == rhs) { "Point($x, $y) is not on the curve" }
         }
     }
 
