@@ -4,7 +4,7 @@ import com.babo.utils.isOdd
 import com.babo.utils.times
 import java.math.BigInteger
 
-data class Point(var x: FieldElement?, var y: FieldElement?, val a: Int, val b: Int) {
+data class Point(val x: FieldElement?, val y: FieldElement?, val a: Int, val b: Int) {
     constructor(x: Long, y: Long, p: Long, a: Int, b: Int) :
             this(FieldElement(x, p), FieldElement(y, p), a, b)
 
@@ -16,15 +16,13 @@ data class Point(var x: FieldElement?, var y: FieldElement?, val a: Int, val b: 
         if (x != null && y != null) {
             val bigA = BigInteger.valueOf(a.toLong())
             val bigB = BigInteger.valueOf(b.toLong())
-            val prime = x!!.prime
+            val prime = x.prime
             // y^2 = x^3 + ax + b
-            val lhs = y!!.num.pow(2) % prime
-            val rhs = (x!!.num.pow(3) + bigA * x!!.num + bigB) % prime
+            val lhs = y.num.pow(2) % prime
+            val rhs = (x.num.pow(3) + bigA * x.num + bigB) % prime
             require(lhs == rhs) { "Point($x, $y) is not on the curve" }
         }
     }
-
-    fun infinity(): Boolean = (x == null) // point of infinity
 
     operator fun plus(other: Point): Point {
         require(a == other.a && b == other.b) {
@@ -66,21 +64,23 @@ data class Point(var x: FieldElement?, var y: FieldElement?, val a: Int, val b: 
 
     private fun addIdenticalPoints(): Point {
         if (y!!.num == BigInteger.ZERO) return Point(null, null, a, b) // infinite zero
+        require(x != null)
 
         val three = BigInteger.valueOf(3)
         val two = BigInteger.valueOf(2)
-        val s = (x!! * x!! * three) / (y!! * two) // s = (3x^2) / (2y)
-        val x3 = s * s - (x!! * two)
-        val y3 = s * (x!! - x3) - y!!
+        val s = (x * x * three) / (y * two) // s = (3x^2) / (2y)
+        val x3 = s * s - (x * two)
+        val y3 = s * (x - x3) - y
         return Point(x3, y3, a, b)
     }
 
     private fun addDifferentPoints(other: Point): Point {
+        require(x != null && y != null && other.x != null && other.y != null)
         // require(this != other && !this.infinity && !other.infinity)
-        val x1 = x!!
-        val y1 = y!!
-        val x2 = other.x!!
-        val y2 = other.y!!
+        val x1 = x
+        val y1 = y
+        val x2 = other.x
+        val y2 = other.y
 
         val s = (y2 - y1) / (x2 - x1) // slop
         val x3 = s * s - x1 - x2
