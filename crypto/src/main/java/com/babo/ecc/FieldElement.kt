@@ -35,10 +35,10 @@ data class FieldElement(var num: BigInteger, val prime: BigInteger) {
         return FieldElement((num * other) % prime, prime)
     }
 
-    fun pow(exponent: BigInteger) = apply {
+    fun pow(exponent: BigInteger) : FieldElement {
         var n = exponent % prime.subtract(BigInteger.ONE)
         if (n < BigInteger.ZERO) n += prime.subtract(BigInteger.ONE)
-        num = this.pow(num, n)
+        return FieldElement(this.pow(num, n), prime)
     }
 
     private fun pow(base: BigInteger, exponent: BigInteger) : BigInteger = when {
