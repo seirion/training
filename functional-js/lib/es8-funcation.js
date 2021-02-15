@@ -3,3 +3,5 @@ const forEach = (array, fn) => {
     for (i = 0; i < array.length; i++)
         fn(array[i]);
 }
+
+export default forEach
