@@ -9,6 +9,7 @@
   "author": "Anto Aravinth <anto.aravinth.cse@gmail.com>",
   "license": "ISC",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-preset-es2017-node7": "^0.5.2"
   }
 }
